@@ -14,35 +14,33 @@ namespace PSI_TD1
     class Program
     {
         static void Main(string[] args)
-        {
+        {        
+            //Bitmap lena = new Bitmap("lena.bmp");
+            ///*
+            //Bitmap coco1 = new Bitmap("coco.bmp");
+            //coco1.RotateFlip(RotateFlipType.Rotate180FlipNone);
+            //coco1.Save("cococopie.bmp");
+            //*/
 
-            
-            Bitmap lena = new Bitmap("lena.bmp");
+            ///*RectangleF rec = new RectangleF(10.0f, 10.0f, 100.0f, 100.0f);
+            //Bitmap l = lena.Clone(rec, PixelFormat.DontCare);
+            //l.Save("lenarec.bmp");*/ // A dé commenter pour avoir une sous partie de l'image
 
-            /*
-            Bitmap coco1 = new Bitmap("coco.bmp");
-            coco1.RotateFlip(RotateFlipType.Rotate180FlipNone);
-            coco1.Save("cococopie.bmp");
-            */
+            //for (int i = 0; i < lena.Height; i++)
+            //    for (int j = 0; j < lena.Width; j++)
+            //    {
+            //        Color mycolor = lena.GetPixel(i, j);
+            //        lena.SetPixel(i, j, Color.FromArgb(255 - mycolor.R, 255 - mycolor.R, 255 - mycolor.R));
 
-            /*RectangleF rec = new RectangleF(10.0f, 10.0f, 100.0f, 100.0f);
-            Bitmap l = lena.Clone(rec, PixelFormat.DontCare);
-            l.Save("lenarec.bmp");*/ // A dé commenter pour avoir une sous partie de l'image
+            //        //   c.SetPixel(i, j, Color.Coral);
+            //    }
 
-            for (int i = 0; i < lena.Height; i++)
-                for (int j = 0; j < lena.Width; j++)
-                {
-                    Color mycolor = lena.GetPixel(i, j);
-                    lena.SetPixel(i, j, Color.FromArgb(255 - mycolor.R, 255 - mycolor.R, 255 - mycolor.R));
-
-                    //   c.SetPixel(i, j, Color.Coral);
-                }
-
-            lena.Save("lenanegative.bmp");
-            Process.Start("lenanegative.bmp");
+            //lena.Save("lenanegative.bmp");
+            //Process.Start("lenanegative.bmp");
+            //Console.ReadLine();
 
 
-            Console.ReadLine();
+
         }
     }
 }
