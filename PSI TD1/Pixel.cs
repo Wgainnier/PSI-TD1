@@ -8,9 +8,9 @@ namespace PSI_TD1
 {
     public class Pixel
     {
-        int red;
-        int green;
-        int blue;
+        public int red;
+        public int green;
+        public int blue;
        
         public Pixel(int red, int green, int blue)
         {
@@ -24,7 +24,7 @@ namespace PSI_TD1
 
         public string ToStringPix()
         {
-            string Pixel = blue+ " " + green +" "+ red; // affichage format BM BGR
+            string Pixel = blue+ "," + green +"," + red; // affichage format BM BGR
             return Pixel;
 
         }

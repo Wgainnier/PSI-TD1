@@ -21,8 +21,14 @@ namespace PSI_TD1
         public int largeurI;
         public int hauteurI;
         public int bitC;
+        public int header;
+        public int headerinfo;
         public Pixel[,] matRGB;
 
+        /// <summary>
+        /// Constructeur MyImage a partir du nom de l'image: myfile
+        /// </summary>
+        /// <param name="myfile"> string nom de l'image à ouvrir</param>
         public MyImage(string myfile)
         {
             this.myfile = myfile;
@@ -38,12 +44,12 @@ namespace PSI_TD1
             }
             else
             {
-                typeI = "Autre que BM";
+                typeI = "Autre que BM"; 
             }
 
             for(int i = 3; i<7; i++)
             {
-                tab[i - 3] = FileByte[i]; // taille image
+                tab[i - 3] = FileByte[i]; // taille Fichier
 
             }
             tailleF = Convertir_endian_to_int(tab);
@@ -90,28 +96,108 @@ namespace PSI_TD1
                 }
             }
 
+            for(int i =0; i<14; i++)
+            {
+
+                tab[i] = FileByte[i]; // header
+
+            }
+            header = Convertir_endian_to_int(tab);
+
+            for (int i = 14; i < 54; i++)
+            {
+
+                tab[i-24] = FileByte[i]; // headerinfo
+
+            }
+            headerinfo = Convertir_endian_to_int(tab);
 
 
 
-
-            //for (int i = 54; i < FileByte.Length; i = i + 60)
-            //{               
-            //    for (int j = i; j < i + 60; j++)
-            //    {   
-            //        matRGB[i,j] =FileByte[j];                
-            //    }                   
-            //}
 
         }
 
         /// <summary>
         /// transforme instance MyImage en fichier binaire respectant la structure BM
         /// </summary>
-        /// <param name="file"></param>
+        /// <param name="file"> nom de l'image </param>
         public void From_image_to_file(string file)
         {
+            byte[] FichierByte = new byte[3*largeurI*hauteurI + 54]; // dimension fichier
 
-           
+            FichierByte[0] = 66; FichierByte[1] = 77;
+            // Header
+            for (int i = 0; i <4; i++)
+            {
+                FichierByte[i + 2] = Convertir_int_to_endian(tailleF, 4)[i];
+            }
+            for(int i=0; i< 4; i++)
+            {
+                FichierByte[i + 6] = 0;
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                FichierByte[i + 10] = Convertir_int_to_endian(tailleO, 4)[i];
+            }
+
+            FichierByte[14] = 40;
+            // headerInfo
+            for (int i=0; i< 3; i++)
+            {
+
+                FichierByte[i + 15] = 0;
+
+            }
+            for(int i=0; i<4; i++)
+            {
+
+                FichierByte[i + 18] = Convertir_int_to_endian(largeurI, 4)[i];
+
+            }
+            for(int i=0; i<4; i++)
+            {
+
+                FichierByte[i + 22] = Convertir_int_to_endian(hauteurI, 4)[i];
+
+            }
+            FichierByte[26] = 1; FichierByte[27] = 0; FichierByte[28] = 24;
+
+            for (int i =0; i<5; i++)
+            {
+
+                FichierByte[i + 29] = 0;
+
+            }
+            FichierByte[34] = 176;
+            FichierByte[35] = 4;
+            for(int i = 0; i< 18; i++)
+            {
+
+                FichierByte[i + 36] = 0;
+
+            }
+
+            int deb = 54;
+            for(int i =0; i <hauteurI; i++)
+            {
+                for(int j=0; j<largeurI; j++)
+                {
+
+                    FichierByte[deb] = Convert.ToByte(matRGB[i,j].blue);
+                    deb++;
+                    FichierByte[deb] = Convert.ToByte(matRGB[i, j].green);
+                    deb++;
+                    FichierByte[deb] = Convert.ToByte(matRGB[i, j].red);
+
+                }
+
+
+            }
+
+            File.WriteAllBytes(file, FichierByte);
+
+
+
 
 
 
