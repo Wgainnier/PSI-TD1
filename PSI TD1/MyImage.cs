@@ -223,7 +223,7 @@ namespace PSI_TD1
                 temp = Convert.ToByte(val / Convert.ToInt32(Math.Pow(256, compteur)));
                 if (temp >= 1)
                 {
-                    val = val - 256 * temp;
+                    val = val - temp*Convert.ToInt32(Math.Pow(256, compteur));
                     tab[i] = temp;
                 }
                 else tab[i] = 0;
@@ -259,6 +259,105 @@ namespace PSI_TD1
 
         }
 
+        public void NoirBlanc()
+        {
+            for(int i =0; i<matRGB.GetLength(0); i++)
+            {
+                for(int j =0; j<matRGB.GetLength(1); j++)
+                {
+                    int moyenne = (matRGB[i, j].blue + matRGB[i, j].green + matRGB[i, j].red)/3;
+
+                    if ( moyenne>=128)
+                    { 
+                        matRGB[i, j].blue = 255;
+                        matRGB[i, j].green = 255;
+                        matRGB[i, j].red = 255;
+                    }
+                   
+                    else
+                    {
+                        matRGB[i, j].blue = 0;
+                        matRGB[i, j].green = 0;
+                        matRGB[i, j].red = 0;
+                    }
+                }
+            }
+        }
+
+        public void NuanceGris()
+        {
+
+            for (int i = 0; i < matRGB.GetLength(0); i++)
+            {
+                for (int j = 0; j < matRGB.GetLength(1); j++)
+                {
+                    double Luminance = 0.2126*matRGB[i,j].red + 0.7152 * matRGB[i, j].green + 0.0722 * matRGB[i, j].blue;
+
+                    if (Luminance <= 0.0031308)
+                    {
+                        matRGB[i, j].blue = Convert.ToInt32(Luminance*12.92);
+                        matRGB[i, j].green = Convert.ToInt32(Luminance * 12.92);
+                        matRGB[i, j].red = Convert.ToInt32(Luminance * 12.92);
+                    }
+
+                    else
+                    {
+                        matRGB[i, j].blue = Convert.ToInt32((1.055*Math.Pow(Luminance,1/2.4))-0.055);
+                        matRGB[i, j].green = Convert.ToInt32((1.055 * Math.Pow(Luminance, 1 / 2.4)) - 0.055);
+                        matRGB[i, j].red = Convert.ToInt32((1.055 * Math.Pow(Luminance, 1 / 2.4)) - 0.055);
+                    }
+                }
+            }
+
+
+
+        }
+
+        public void Agrandir()
+        {
+
+            
+
+
+
+        }
+
+        /// <summary>
+        /// retrecit de 50%
+        /// </summary>
+        public void retrecir()
+        {
+            int x = 0;
+            int y = 0;
+            Pixel[,] matRGBR =  new Pixel[matRGB.GetLength(0)/2,matRGB.GetLength(1)/2];
+            for (int i = 0; i < matRGB.GetLength(0); i= i+2)
+            {
+                
+                for (int j = 0; j < matRGB.GetLength(1); j = j+2)
+                {
+                    matRGBR[x, y] = matRGB[i,j];
+                    y++;
+                }
+                x++;
+            }
+        }
+
+        public void Rotation()
+        {
+
+
+
+
+
+        }
+        public void Miroir()
+        {
+
+
+
+
+
+        }
 
 
 

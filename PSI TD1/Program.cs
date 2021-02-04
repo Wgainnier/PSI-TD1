@@ -15,6 +15,8 @@ namespace PSI_TD1
     {
         static void Main(string[] args)
         {
+
+            #region TD1
             //Bitmap lena = new Bitmap("lena.bmp");
             ///*
             //Bitmap coco1 = new Bitmap("coco.bmp");
@@ -38,19 +40,57 @@ namespace PSI_TD1
             //lena.Save("lenanegative.bmp");
             //Process.Start("lenanegative.bmp");
             //Console.ReadLine();
-            
-            MyImage a = new MyImage("Test.bmp");
-            a.ToStringmatRGB();
-            
-            Bitmap Test = new Bitmap("Test.bmp");
-            Test.Save("TestImFile.bmp");
-            Process.Start("TestImFile.bmp");
 
-            MyImage b = new MyImage("TestImFile.bmp");
-            b.From_image_to_file("TestImFile.bmp");
-            Process.Start("TestImFile.bmp");
+            #endregion TD1 
+
+            #region TestAffichage
+            //MyImage a = new MyImage("Test.bmp");
+            //a.ToStringmatRGB();
+
+            //Bitmap Test = new Bitmap("Test.bmp");
+            //Test.Save("TestImFile.bmp");
+
+
+            //MyImage b = new MyImage("TestImFile.bmp");
+            //b.From_image_to_file("TestImFile.bmp");
+            //Process.Start("TestImFile.bmp");
+            //Console.ReadLine();
+
+            #endregion TestAffichage
+
+            #region TraiterImage
+
+            //MyImage lena = new MyImage("lena.bmp");
+
+            //lena.NoirBlanc();
+
+            //lena.From_image_to_file("lena.bmp");
+
+            //Process.Start("lena.bmp");
+
+            #endregion TraiterImage
+
+            #region NuanceGris
+            
+            
+
+            Bitmap lena = new Bitmap("lena.bmp");
+            lena.Save("lena1.bmp");
+            
+            MyImage lena1 = new MyImage("lena1.bmp");
+
+
+            lena1.NuanceGris();
+
+            lena1.From_image_to_file("lena1.bmp");
+
+
+
+            Process.Start("lena1.bmp");
             Console.ReadLine();
 
+
+            #endregion Nuance Gris
 
         }
     }
