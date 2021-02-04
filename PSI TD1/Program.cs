@@ -77,6 +77,7 @@ namespace PSI_TD1
             Bitmap lena = new Bitmap("lena.bmp");
             lena.Save("lena1.bmp");
             
+
             MyImage lena1 = new MyImage("lena1.bmp");
 
 

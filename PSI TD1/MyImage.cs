@@ -291,7 +291,29 @@ namespace PSI_TD1
             {
                 for (int j = 0; j < matRGB.GetLength(1); j++)
                 {
-                    double Luminance = 0.2126*matRGB[i,j].red + 0.7152 * matRGB[i, j].green + 0.0722 * matRGB[i, j].blue;
+
+                    double rouge = matRGB[i, j].red / 255;
+                    double bleu = matRGB[i, j].blue / 255;
+                    double vert = matRGB[i, j].green / 255;
+
+                    if (rouge <= 0.04045) rouge = rouge / 12.92;
+                    else {
+                        rouge = Math.Pow((rouge + 0.055 / 1.055), 2.4);
+                         };
+                    if (bleu <= 0.04045) bleu = bleu / 12.92;
+                    else
+                    {
+                        bleu = Math.Pow((bleu + 0.055 / 1.055), 2.4);
+                    };
+                    if (vert <= 0.04045) vert = vert / 12.92;
+                    else
+                    {
+                        vert = Math.Pow((vert + 0.055 / 1.055), 2.4);
+                    };
+
+
+
+                    double Luminance = 0.2126*rouge + 0.7152 * vert + 0.0722 * bleu;
 
                     if (Luminance <= 0.0031308)
                     {
