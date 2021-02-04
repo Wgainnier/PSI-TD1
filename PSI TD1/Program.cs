@@ -9,7 +9,7 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Diagnostics;
 
-namespace PSI_TD1
+namespace PSI
 {
     class Program
     {

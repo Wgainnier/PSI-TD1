@@ -10,7 +10,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 
-namespace PSI_TD1
+namespace PSI
 {
     public class MyImage
     {

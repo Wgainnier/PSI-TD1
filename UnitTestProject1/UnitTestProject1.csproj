@@ -56,9 +56,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PSI TD1\PSI TD1.csproj">
+    <ProjectReference Include="..\PSI TD1\PSI.csproj">
       <Project>{d3047315-2bed-444a-ae1f-d8cef0c93980}</Project>
-      <Name>PSI TD1</Name>
+      <Name>PSI</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

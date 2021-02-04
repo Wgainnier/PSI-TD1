@@ -11,7 +11,7 @@ using System.Diagnostics;
 using System.IO;
 
 
-namespace PSI_TD1
+namespace PSI
 {
     [TestClass]
     public class UnitTest1
