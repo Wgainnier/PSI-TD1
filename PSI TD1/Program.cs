@@ -39,8 +39,8 @@ namespace PSI_TD1
             //Process.Start("lenanegative.bmp");
             //Console.ReadLine();
 
-            MyImage a = new MyImage("lena.bmp");
-            Console.WriteLine(a.typeI);
+            MyImage a = new MyImage("Test.bmp");
+            a.ToStringmatRGB();
             Console.ReadLine();
 
 

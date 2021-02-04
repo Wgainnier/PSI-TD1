@@ -21,7 +21,7 @@ namespace PSI_TD1
         public int largeurI;
         public int hauteurI;
         public int bitC;
-        public byte[,] matRGB;
+        public Pixel[,] matRGB;
 
         public MyImage(string myfile)
         {
@@ -73,7 +73,27 @@ namespace PSI_TD1
                 tab[i - 28] = FileByte[i]; // nb bite couleur
             }
             bitC = Convertir_endian_to_int(tab);
-       
+
+            int compteur = 54;
+            matRGB = new Pixel[hauteurI,largeurI];
+            for (int i = 0; i < matRGB.GetLength(0); i++)
+            {
+                for (int j = 0; j < matRGB.GetLength(1); j++)
+                {
+                    int taille = FileByte.Length;
+                    int red = FileByte[compteur];
+                    int green = FileByte[compteur + 1];
+                    int blue = FileByte[compteur + 2];
+
+                    matRGB[i, j] = new Pixel(blue, green, red); // remplissage matrice de pixel BGR (blue green red car inverser);
+                    compteur = compteur + 3;
+                }
+            }
+
+
+
+
+
             //for (int i = 54; i < FileByte.Length; i = i + 60)
             //{               
             //    for (int j = i; j < i + 60; j++)
@@ -143,6 +163,27 @@ namespace PSI_TD1
             }
             Array.Reverse(tab);
             return tab;
+        }
+
+        public void ToStringmatRGB()
+        {
+            Console.WriteLine("nom :"+  myfile + "\n");
+            Console.WriteLine("Type image : " + typeI +"\n");
+            Console.WriteLine("taille fichier :" + tailleF + "\n");
+            Console.WriteLine("taille offset :" + tailleO + "\n");
+            Console.WriteLine("largeur image :" + largeurI + "\n");
+            Console.WriteLine("hauteur image :" + hauteurI + "\n");
+            Console.WriteLine("nombre de bit couleur :" + bitC + "\n");
+
+            for (int i = 0; i < matRGB.GetLength(0); i++)
+            {
+                for (int j = 0; j < matRGB.GetLength(1); j++)
+                {
+                    Console.Write(matRGB[i, j].ToStringPix() + " ");
+                }
+                Console.WriteLine();
+            }
+
         }
 
 
