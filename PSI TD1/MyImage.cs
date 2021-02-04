@@ -47,9 +47,9 @@ namespace PSI_TD1
                 typeI = "Autre que BM"; 
             }
 
-            for(int i = 3; i<7; i++)
+            for(int i = 2; i<6; i++)
             {
-                tab[i - 3] = FileByte[i]; // taille Fichier
+                tab[i - 2] = FileByte[i]; // taille Fichier
 
             }
             tailleF = Convertir_endian_to_int(tab);
@@ -76,7 +76,7 @@ namespace PSI_TD1
 
             for(int i = 28; i<30; i++)
             {
-                tab[i - 28] = FileByte[i]; // nb bite couleur
+                tab[i - 28] = FileByte[i]; // nb bit couleur
             }
             bitC = Convertir_endian_to_int(tab);
 
@@ -111,7 +111,8 @@ namespace PSI_TD1
             // Header
             for (int i = 0; i <4; i++)
             {
-                FichierByte[i + 2] = Convertir_int_to_endian(tailleF, 4)[i];
+                
+                FichierByte[i+2] = Convertir_int_to_endian(tailleF, 4)[i];
             }
             for(int i=0; i< 4; i++)
             {
@@ -170,7 +171,7 @@ namespace PSI_TD1
                     FichierByte[deb] = Convert.ToByte(matRGB[i, j].green);
                     deb++;
                     FichierByte[deb] = Convert.ToByte(matRGB[i, j].red);
-
+                    deb++;
                 }
 
 
@@ -234,6 +235,9 @@ namespace PSI_TD1
             return tab;
         }
 
+        /// <summary>
+        /// Affiche Matrice RGB
+        /// </summary>
         public void ToStringmatRGB()
         {
             Console.WriteLine("nom :"+  myfile + "\n");
