@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSI TD1", "PSI TD1\PSI TD1.csproj", "{D3047315-2BED-444A-AE1F-D8CEF0C93980}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{C4B7578E-1DFA-4F5A-8264-96578E38A452}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{D3047315-2BED-444A-AE1F-D8CEF0C93980}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3047315-2BED-444A-AE1F-D8CEF0C93980}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3047315-2BED-444A-AE1F-D8CEF0C93980}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4B7578E-1DFA-4F5A-8264-96578E38A452}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4B7578E-1DFA-4F5A-8264-96578E38A452}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4B7578E-1DFA-4F5A-8264-96578E38A452}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4B7578E-1DFA-4F5A-8264-96578E38A452}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

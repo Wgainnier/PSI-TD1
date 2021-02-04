@@ -14,7 +14,7 @@ namespace PSI_TD1
     class Program
     {
         static void Main(string[] args)
-        {        
+        {
             //Bitmap lena = new Bitmap("lena.bmp");
             ///*
             //Bitmap coco1 = new Bitmap("coco.bmp");
@@ -39,7 +39,9 @@ namespace PSI_TD1
             //Process.Start("lenanegative.bmp");
             //Console.ReadLine();
 
-
+            MyImage a = new MyImage("lena.bmp");
+            Console.WriteLine(a.typeI);
+            Console.ReadLine();
 
 
         }

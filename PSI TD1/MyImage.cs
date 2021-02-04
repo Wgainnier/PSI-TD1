@@ -12,88 +12,82 @@ using System.IO;
 
 namespace PSI_TD1
 {
-    class MyImage
+    public class MyImage
     {
-        string myfile;
-        string typeI;
-        int tailleF;
-        int tailleO;
-        int largeurI;
-        int hauteurI;
-        int nbbit;
-        int[,] matRGB;
-       
-
-
-        //public MyImage (string typeI, int tailleF, int tailleO, int largeurI, int hauteurI, int nbbit, int[,] matRGB)
-        //{
-        //    this.typeI = typeI;
-        //    this.tailleF = tailleF;
-        //    this.tailleO = tailleO;
-        //    this.largeurI = largeurI;
-        //    this.hauteurI = hauteurI;
-        //    this.nbbit = nbbit;
-        //    this.matRGB = matRGB;
-
-
-        //}
+        public string myfile;
+        public string typeI;
+        public int tailleF;
+        public int tailleO;
+        public int largeurI;
+        public int hauteurI;
+        public int bitC;
+        public byte[,] matRGB;
 
         public MyImage(string myfile)
         {
             this.myfile = myfile;
 
-            byte[] FileByte = File.ReadAllBytes(myfile);   
+            byte[] FileByte = File.ReadAllBytes(myfile);
+            byte[] tab = new byte[4];
 
-            //myfile est un vecteur composé d'octets représentant les métadonnées et les données de l'image
-
-            //Métadonnées du fichier
-            Console.WriteLine("\n Header \n");
-
-            for (int i = 0; i < 14; i++)
+            // initialisation des differentes variables en fonctions des différents Bytes
+            // les 2 premiers octets si 66 et 77 = format bitmap
+            if( FileByte[0] == 66 && FileByte[1]== 77)
             {
-                myfile += FileByte[i] + " ";
+                typeI = "BM";
             }
-            //Métadonnées de l'image
-            Console.WriteLine("\n HEADER INFO \n");
-
-            myfile = myfile + "\n";
-            for (int i = 14; i < 54; i++)
+            else
             {
-                myfile += FileByte[i] + " ";
-            }
-            myfile = myfile + "\n";
-
-            //mettre header dans un string puis parse dans un tableau 
-
-            int largeur = FileByte[18] + FileByte[19] * 2 ^ 8 + FileByte[20] * 2 ^ 16 + FileByte[21] * 2 ^ 24;
-            int longueur = FileByte[22] + FileByte[23] * 2 ^ 8 + FileByte[24] * 2 ^ 16 + FileByte[25] * 2 ^ 24;
-
-
-
-
-            //L'image elle-même
-            Console.WriteLine("\n IMAGE \n");
-            for (int i = 54; i < FileByte.Length; i = i + 60)
-            {
-                int x = 0;
-                for (int j = i; j < i + 60; j++)
-                {
-                    int y = 0;
-                    Console.Write(FileByte[j] + " ");
-                    matRGB[x, y] =
-                       y++;
-                }
-                x++;
-                Console.WriteLine();
+                typeI = "Autre que BM";
             }
 
-            File.WriteAllBytes("./Images/Sortie.bmp", FileByte);
+            for(int i = 3; i<7; i++)
+            {
+                tab[i - 3] = FileByte[i]; // taille image
 
-            Console.ReadLine();
+            }
+            tailleF = Convertir_endian_to_int(tab);
 
+            for(int i=10; i<14;i++)
+            {
+
+                tab[i - 10] = FileByte[i]; // taille offset
+
+            }
+            tailleO = Convertir_endian_to_int(tab);
+
+                for(int i =18; i< 22; i++)
+            {
+                 tab[i-18] = FileByte[i];   // largeur
+            }
+             largeurI = Convertir_endian_to_int(tab);
+
+            for(int i = 22; i<26; i++)
+            {
+                tab[i - 22] = FileByte[i]; // hauteur image
+            }
+            hauteurI = Convertir_endian_to_int(tab);
+
+            for(int i = 28; i<30; i++)
+            {
+                tab[i - 28] = FileByte[i]; // nb bite couleur
+            }
+            bitC = Convertir_endian_to_int(tab);
+       
+            //for (int i = 54; i < FileByte.Length; i = i + 60)
+            //{               
+            //    for (int j = i; j < i + 60; j++)
+            //    {   
+            //        matRGB[i,j] =FileByte[j];                
+            //    }                   
+            //}
 
         }
 
+        /// <summary>
+        /// transforme instance MyImage en fichier binaire respectant la structure BM
+        /// </summary>
+        /// <param name="file"></param>
         public void From_image_to_file(string file)
         {
 
