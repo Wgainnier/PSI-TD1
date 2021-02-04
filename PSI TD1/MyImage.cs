@@ -158,6 +158,7 @@ namespace PSI_TD1
                     tab[i] = temp;
                 }
                 else tab[i] = 0;
+
                 compteur--;
 
             }
