@@ -96,25 +96,7 @@ namespace PSI_TD1
                 }
             }
 
-            for(int i =0; i<14; i++)
-            {
-
-                tab[i] = FileByte[i]; // header
-
-            }
-            header = Convertir_endian_to_int(tab);
-
-            for (int i = 14; i < 54; i++)
-            {
-
-                tab[i-24] = FileByte[i]; // headerinfo
-
-            }
-            headerinfo = Convertir_endian_to_int(tab);
-
-
-
-
+           
         }
 
         /// <summary>
