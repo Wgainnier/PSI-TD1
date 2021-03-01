@@ -74,25 +74,25 @@ namespace PSI
             
             
 
-            Bitmap lena = new Bitmap("lena.bmp");
-            lena.Save("lena1.bmp");
+            Bitmap lena = new Bitmap("coco.bmp");
+            lena.Save("coco1.bmp");
             
 
-            MyImage lena1 = new MyImage("lena1.bmp");
+            MyImage lena1 = new MyImage("coco1.bmp");
 
 
-            lena1.NuanceGris();
+            lena1.Miroir();
 
-            lena1.From_image_to_file("lena1.bmp");
+            lena1.From_image_to_file("coco1.bmp");
 
 
 
-            Process.Start("lena1.bmp");
+            Process.Start("coco1.bmp");
             Console.ReadLine();
 
 
             #endregion Nuance Gris
-            //jj
+            
         }
     }
 }

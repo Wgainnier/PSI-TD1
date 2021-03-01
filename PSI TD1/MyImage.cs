@@ -291,43 +291,16 @@ namespace PSI
             {
                 for (int j = 0; j < matRGB.GetLength(1); j++)
                 {
+                    double rouge = matRGB[i, j].red ;
+                    double bleu = matRGB[i, j].blue ;
+                    double vert = matRGB[i, j].green ;
 
-                    double rouge = matRGB[i, j].red / 255;
-                    double bleu = matRGB[i, j].blue / 255;
-                    double vert = matRGB[i, j].green / 255;
+                    double moyenne = (rouge + bleu + vert )/ 3;
 
-                    if (rouge <= 0.04045) rouge = rouge / 12.92;
-                    else {
-                        rouge = Math.Pow((rouge + 0.055 / 1.055), 2.4);
-                         };
-                    if (bleu <= 0.04045) bleu = bleu / 12.92;
-                    else
-                    {
-                        bleu = Math.Pow((bleu + 0.055 / 1.055), 2.4);
-                    };
-                    if (vert <= 0.04045) vert = vert / 12.92;
-                    else
-                    {
-                        vert = Math.Pow((vert + 0.055 / 1.055), 2.4);
-                    };
+                    matRGB[i,j].red = Convert.ToInt32(moyenne);
+                    matRGB[i, j].blue = Convert.ToInt32(moyenne);
+                    matRGB[i, j].green = Convert.ToInt32(moyenne);
 
-
-
-                    double Luminance = 0.2126*rouge + 0.7152 * vert + 0.0722 * bleu;
-
-                    if (Luminance <= 0.0031308)
-                    {
-                        matRGB[i, j].blue = Convert.ToInt32(Luminance*12.92);
-                        matRGB[i, j].green = Convert.ToInt32(Luminance * 12.92);
-                        matRGB[i, j].red = Convert.ToInt32(Luminance * 12.92);
-                    }
-
-                    else
-                    {
-                        matRGB[i, j].blue = Convert.ToInt32((1.055*Math.Pow(Luminance,1/2.4))-0.055);
-                        matRGB[i, j].green = Convert.ToInt32((1.055 * Math.Pow(Luminance, 1 / 2.4)) - 0.055);
-                        matRGB[i, j].red = Convert.ToInt32((1.055 * Math.Pow(Luminance, 1 / 2.4)) - 0.055);
-                    }
                 }
             }
 
@@ -351,17 +324,34 @@ namespace PSI
         {
             int x = 0;
             int y = 0;
-            Pixel[,] matRGBR =  new Pixel[matRGB.GetLength(0)/2,matRGB.GetLength(1)/2];
+            Pixel[,] matRGBR =  new Pixel[(matRGB.GetLength(0)/2) ,(matRGB.GetLength(1)/2)];
+
             for (int i = 0; i < matRGB.GetLength(0); i= i+2)
             {
                 
-                for (int j = 0; j < matRGB.GetLength(1); j = j+2)
+                for (int j = 0; j < matRGB.GetLength(1) - 1; j = j+2)
                 {
                     matRGBR[x, y] = matRGB[i,j];
                     y++;
                 }
+                y = 0;
                 x++;
             }
+
+             
+
+            for(int i =0; i < matRGBR.GetLength(0); i ++)
+            {
+                for(int j =0; j< matRGBR.GetLength(1); j ++)
+                {
+                    matRGB[i, j] = matRGBR[i, j];
+                }
+
+
+
+            }
+
+
         }
 
         public void Rotation()
@@ -372,14 +362,75 @@ namespace PSI
 
 
         }
-        public void Miroir()
+        public void Miroir() // par vertical
         {
+            int x = matRGB.GetLength(0) -1;
+            int y = matRGB.GetLength(1) - 1;
+
+            Pixel[,] matRGBR = new Pixel[(matRGB.GetLength(0) ), matRGB.GetLength(1)];
 
 
+            for(int i =0; i< matRGB.GetLength(0); i ++)
+            {
+                for(int j =0; j < matRGB.GetLength(1); j++)
+                {
+                    matRGBR[i, j] = matRGB[i, j];
 
 
+                }
 
-        }
+
+            }
+
+            for(int col = 0; col< matRGB.GetLength(1); col++)
+            {
+                for(int ligne =0; ligne < matRGB.GetLength(0); ligne++)
+                {
+                    matRGB[ligne, col] = matRGBR[ligne, y-col];
+                    matRGB[ligne, y - col] = matRGBR[ligne, col];
+
+
+                }
+
+
+            }
+
+        } 
+
+        //public void Miroir() par horizontal
+        //{
+        //    int x = matRGB.GetLength(0) - 1;
+        //    int y = matRGB.GetLength(1) - 1;
+
+        //    Pixel[,] matRGBR = new Pixel[(matRGB.GetLength(0)), matRGB.GetLength(1)];
+
+
+        //    for (int i = 0; i < matRGB.GetLength(0); i++)
+        //    {
+        //        for (int j = 0; j < matRGB.GetLength(1); j++)
+        //        {
+        //            matRGBR[i, j] = matRGB[i, j];
+
+
+        //        }
+
+
+        //    }
+
+        //    for (int i = 0; i < matRGB.GetLength(0); i++)
+        //    {
+        //        for (int j = 0; j < matRGB.GetLength(1); j++)
+        //        {
+        //            matRGB[i, j] = matRGBR[x - i, y - j];
+        //            matRGB[x - i, y - j] = matRGBR[i, j];
+
+
+        //        }
+
+
+        //    }
+        //    *
+        //}
 
 
 
