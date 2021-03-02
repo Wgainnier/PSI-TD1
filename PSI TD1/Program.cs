@@ -93,7 +93,7 @@ namespace PSI
         }
 
 
-
+        
 
         static void Menu1(MyImage a)
         {
@@ -155,11 +155,11 @@ namespace PSI
 
                     break;
                 case 3:
-                   a.Miroir();
+                   a.MiroirH();
 
                     break;
                 case 4:
-                    a.Miroir();
+                    a.MiroirV();
 
                     break;
                 case 5:
@@ -167,14 +167,17 @@ namespace PSI
 
                     break;
                 case 6:
-                    a.Agrandir();
+                    double coeff = 0;
+                    Console.WriteLine("donner le coeff d'agrandissement entre 0 à 0,5 (de 0 à 50% d'agrandissement d'image");
+                    coeff = Convert.ToDouble(Console.ReadLine());
+                    a.Agrandir( coeff);
 
                     break;
                 case 7:
-                    double coeff = 0;
-                    Console.WriteLine("donner le coeff de réduction");
+                    double coeffR = 0;
+                    Console.WriteLine("donner le coeff de réduction entre 0 à 0,5 (de 0 à 50% de réduction d'image");
                     coeff = Convert.ToDouble(Console.ReadLine());
-                    a.retrecir(coeff);
+                    a.retrecir(coeffR);
 
                     break;
 
