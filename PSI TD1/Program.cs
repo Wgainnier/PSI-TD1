@@ -98,7 +98,7 @@ namespace PSI
         {
             int choix = 0;
 
-            Console.Write("Que Voulez vous faire sur l'image");
+            Console.Write("Que Voulez vous faire ?");
             Console.WriteLine("\n1 - Traitement d'Image");
             Console.WriteLine("2 - Matrice Convolution");
             Console.WriteLine("3 - QR Code");
@@ -110,6 +110,14 @@ namespace PSI
             {
                 case 1:
                     SousMenu1(a);
+
+                    break;
+                case 2:
+                    SousMenu2(a);
+
+                    break;
+                case 3:
+                    SousMenu3(a);
 
                     break;
 
@@ -175,6 +183,62 @@ namespace PSI
 
         }
 
+
+        static void SousMenu2(MyImage a)
+        {
+            int choix = 0;
+
+
+
+            switch (choix)
+            {
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+
+
+
+
+            }
+
+
+
+
+
+        }
+
+        static void SousMenu3(MyImage a)
+        {
+            int choix = 0;
+
+
+
+            switch (choix)
+            {
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+
+
+
+
+            }
+
+
+
+
+
+        }
 
     }
 }
