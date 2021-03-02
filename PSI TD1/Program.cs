@@ -75,6 +75,7 @@ namespace PSI
             Bitmap lena = new Bitmap("coco.bmp");
             lena.Save("coco1.bmp");
             MyImage lena1 = new MyImage("coco1.bmp");
+            
 
 
             Menu1(lena1);
@@ -82,9 +83,9 @@ namespace PSI
 
             
 
-            lena1.From_image_to_file("coco1.bmp");
-            Process.Start("coco1.bmp");
-            Console.ReadLine();
+            //lena1.From_image_to_file("coco1.bmp");
+            //Process.Start("coco1.bmp");
+            //Console.ReadLine();
 
 
             #endregion Nuance Gris
