@@ -72,21 +72,17 @@ namespace PSI
 
             #region NuanceGris
             
-            
-
             Bitmap lena = new Bitmap("coco.bmp");
             lena.Save("coco1.bmp");
-            
-
             MyImage lena1 = new MyImage("coco1.bmp");
 
 
-            lena1.Miroir();
+            Menu1(lena1);
+
+
+            
 
             lena1.From_image_to_file("coco1.bmp");
-
-
-
             Process.Start("coco1.bmp");
             Console.ReadLine();
 
@@ -94,5 +90,91 @@ namespace PSI
             #endregion Nuance Gris
             
         }
+
+
+
+
+        static void Menu1(MyImage a)
+        {
+            int choix = 0;
+
+            Console.Write("Que Voulez vous faire sur l'image");
+            Console.WriteLine("\n1 - Traitement d'Image");
+            Console.WriteLine("2 - Matrice Convolution");
+            Console.WriteLine("3 - QR Code");
+            Console.WriteLine("4 - ");
+            choix = Convert.ToInt32(Console.ReadLine());
+
+
+            switch (choix)
+            {
+                case 1:
+                    SousMenu1(a);
+
+                    break;
+
+
+                default:
+                    break;
+
+
+            }
+        }
+
+
+        static void SousMenu1(MyImage a)
+        {
+            int choix = 0;
+
+            Console.Write("Que Voulez vous faire sur l'image");
+            Console.WriteLine("1 - Noir et Blanc");
+            Console.WriteLine("2 - Nuance de gris");
+            Console.WriteLine("3 - Miroir par horizontal");
+            Console.WriteLine("4 - Miroir par Vertical");
+            Console.WriteLine("5 - Rotation Image");
+            Console.WriteLine("6 - Agrandir Image");
+            Console.WriteLine("7 - Retrecir Image");
+            choix = Convert.ToInt32(Console.ReadLine());
+            switch (choix)
+            {
+                case 1:
+                    a.NoirBlanc();
+
+                    break;
+                case 2:
+                    a.NuanceGris();
+
+                    break;
+                case 3:
+                   a.Miroir();
+
+                    break;
+                case 4:
+                    a.Miroir();
+
+                    break;
+                case 5:
+                    a.Rotation();
+
+                    break;
+                case 6:
+                    a.Agrandir();
+
+                    break;
+                case 7:
+                    a.retrecir();
+
+                    break;
+
+                default:
+                    break;
+
+
+            }
+
+
+        }
+
+
     }
 }
