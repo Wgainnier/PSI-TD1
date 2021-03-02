@@ -333,6 +333,16 @@ namespace PSI
 
             Pixel[,] matRGBR = new Pixel[(matRGB.GetLength(0) -nbligne), (matRGB.GetLength(1) -nbcol)];
 
+            for(int i =0; i< matRGBR.GetLength(0); i++)
+            {
+                for(int j =0; j<matRGBR.GetLength(1); j++)
+                {
+
+                    matRGBR[i, j] = new Pixel(255, 255, 255);
+
+                }
+            }
+
 
             for (int i = 0; i < matRGB.GetLength(0) - nbligne; i++)
             {
