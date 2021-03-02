@@ -320,37 +320,98 @@ namespace PSI
         /// <summary>
         /// retrecit de 50%
         /// </summary>
-        public void retrecir()
+        public void retrecir(double coeff)
         {
             int x = 0;
             int y = 0;
-            Pixel[,] matRGBR =  new Pixel[(matRGB.GetLength(0)/2) ,(matRGB.GetLength(1)/2)];
 
-            for (int i = 0; i < matRGB.GetLength(0); i= i+2)
+            int nbcol= Convert.ToInt32(matRGB.GetLength(1) * coeff);
+            int intervC = matRGB.GetLength(1) / nbcol;
+
+            int nbligne = Convert.ToInt32(matRGB.GetLength(0) * coeff);
+            int intervL = matRGB.GetLength(0) / nbligne;
+
+            Pixel[,] matRGBR = new Pixel[(matRGB.GetLength(0) -nbligne), (matRGB.GetLength(1) -nbcol)];
+
+
+            for (int i = 0; i < matRGB.GetLength(0) - nbligne; i++)
             {
-                
-                for (int j = 0; j < matRGB.GetLength(1) - 1; j = j+2)
+                if (i % intervL != 0)
                 {
-                    matRGBR[x, y] = matRGB[i,j];
-                    y++;
+                    for (int j = 0; j < matRGB.GetLength(1) - nbcol; j++)
+                    {
+                        if (j % intervC != 0)
+                        {
+                            matRGBR[x, y] = matRGB[i, j];
+
+                            y++;
+                        }
+                    }
+                    y = 0;
+                    x++;
                 }
-                y = 0;
-                x++;
             }
 
-             
-
-            for(int i =0; i < matRGBR.GetLength(0); i ++)
+            for (int i = 0; i < matRGB.GetLength(0); i++)
             {
-                for(int j =0; j< matRGBR.GetLength(1); j ++)
+                for (int j = 0; j < matRGB.GetLength(1); j++)
+                {
+                    matRGB[i, j] = new Pixel(255, 255, 255);
+
+
+                }
+
+
+            }
+
+            for (int i = 0; i < matRGB.GetLength(0) - nbligne; i++)
+            {
+                for (int j = 0; j < matRGB.GetLength(1) - nbcol; j++)
                 {
                     matRGB[i, j] = matRGBR[i, j];
-                }
 
+
+                }
 
 
             }
 
+
+            //Pixel[,] matRGBR =  new Pixel[(matRGB.GetLength(0)/2) ,(matRGB.GetLength(1)/2)];
+
+            //for (int i = 0; i < matRGB.GetLength(0); i= i+2)
+            //{
+
+            //    for (int j = 0; j < matRGB.GetLength(1) - 1; j = j+2)
+            //    {
+            //        matRGBR[x, y] = matRGB[i,j];
+            //        y++;
+            //    }
+            //    y = 0;
+            //    x++;
+            //}
+
+
+
+            //for (int i = 0; i < matRGBR.GetLength(0); i++)
+            //{
+            //    for (int j = 0; j < matRGBR.GetLength(1); j++)
+            //    {
+            //        matRGB[i, j] = matRGBR[i, j];
+            //    }
+            //}
+
+            //for (int i = 0; i < matRGB.GetLength(0); i = i + 2)
+            //{
+
+            //    for (int j = 0; j < matRGB.GetLength(1) - 1; j = j + 2)
+            //    {
+            //        matRGBR[x, y] = matRGB[i, j];
+            //        y++;
+            //    }
+            //    y = 0;
+            //    x++;
+            //}
 
         }
 

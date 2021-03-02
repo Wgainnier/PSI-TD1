@@ -81,15 +81,15 @@ namespace PSI
             Menu1(lena1);
 
 
-            
 
-            //lena1.From_image_to_file("coco1.bmp");
-            //Process.Start("coco1.bmp");
-            //Console.ReadLine();
+
+            lena1.From_image_to_file("coco1.bmp");
+            Process.Start("coco1.bmp");
+            Console.ReadLine();
 
 
             #endregion Nuance Gris
-            
+
         }
 
 
@@ -171,7 +171,10 @@ namespace PSI
 
                     break;
                 case 7:
-                    a.retrecir();
+                    double coeff = 0;
+                    Console.WriteLine("donner le coeff de réduction");
+                    coeff = Convert.ToDouble(Console.ReadLine());
+                    a.retrecir(coeff);
 
                     break;
 
