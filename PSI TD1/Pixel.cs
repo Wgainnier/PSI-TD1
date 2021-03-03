@@ -24,7 +24,7 @@ namespace PSI
 
         public string ToStringPix()
         {
-            string Pixel = blue+ "," + green +"," + red; // affichage format BM BGR
+            string Pixel = blue+ "," + green +"," + red; // affichage format bitmap RGB
             return Pixel;
 
         }

@@ -40,11 +40,11 @@ namespace PSI
             // les 2 premiers octets si 66 et 77 = format bitmap
             if( FileByte[0] == 66 && FileByte[1]== 77)
             {
-                typeI = "BM";
+                typeI = "bmp";
             }
             else
             {
-                typeI = "Autre que BM"; 
+                typeI = "Autre que bmp"; 
             }
 
             for(int i = 2; i<6; i++)
@@ -91,7 +91,7 @@ namespace PSI
                     int green = FileByte[compteur + 1];
                     int blue = FileByte[compteur + 2];
 
-                    matRGB[i, j] = new Pixel(blue, green, red); // remplissage matrice de pixel BGR (blue green red car inverser);
+                    matRGB[i, j] = new Pixel(blue, green, red); // remplissage matrice de pixel BGR (blue green red car inversé);
                     compteur = compteur + 3;
                 }
             }
