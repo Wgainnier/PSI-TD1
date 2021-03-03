@@ -196,7 +196,10 @@ namespace PSI
             int choix = 0;
             Console.WriteLine("Quel type de filtre voulez vous?");
             Console.WriteLine("1 - Filtre Flou");
-            Console.WriteLine("2 - Filtre ");
+            Console.WriteLine("2 - Filtre Renforcement des bords");
+            Console.WriteLine("3 - Filtre Detection des contours");
+            Console.WriteLine("4 - Filtre Repoussage");
+            Console.WriteLine("5 - Filtre Repoussage");
             choix = Convert.ToInt32(Console.ReadLine());
 
 
@@ -204,15 +207,30 @@ namespace PSI
             switch (choix)
             {
                 case 1:
-                    int[,] NoyauM = { { 1, 1, 1}, { 1, 1, 1}, { 1,1,1} };
+                    int[,] NoyauFlou = { { 1, 1, 1}, { 1, 1, 1}, { 1,1,1} };
 
-                    a.MatriceConvolution(NoyauM);
+                    a.MatriceConvolution(NoyauFlou);
                     break;
                 case 2:
+
+                    int[,] NoyauRenforcementdesbords = { { 0, 0, 0 }, { -1, 1, 0 }, { 0, 0, 0 } };
+
+                    a.MatriceConvolution(NoyauRenforcementdesbords);
                     break;
                 case 3:
+
+                    int[,] NoyauDetectiondescontours = { { 0, 1, 0 }, { 1, -4, 1 }, { 0, 1, 0 } };
+
+                    a.MatriceConvolution(NoyauDetectiondescontours);
                     break;
                 case 4:
+                    int[,] NoyauRepoussage = { { -2, -1, 0 }, { -1, 1, 1 }, { 0, 1, 2 } };
+
+                    a.MatriceConvolution(NoyauRepoussage);
+                    break;
+                case 5:
+                    int[,] NoyauContraste = { { 0, -1, 0 }, { -1, 5, -1 }, { 0, -1, 0 } };
+                    a.MatriceConvolution(NoyauContraste);
                     break;
 
 

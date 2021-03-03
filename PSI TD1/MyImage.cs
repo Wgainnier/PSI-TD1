@@ -609,6 +609,7 @@ namespace PSI
             int AccumGreen = 0;
             int AccumBlue = 0;
             int somme=0;
+            int diviseur = 0;
             Pixel[,] MatriceRGBcopie = new Pixel[matRGB.GetLength(0), matRGB.GetLength(1)];
 
             for(int i =0; i<MatriceRGBcopie.GetLength(0); i++)
@@ -631,42 +632,53 @@ namespace PSI
                 }
             }
 
-            for (int i =1; i< matRGB.GetLength(0)-1; i++)
+            if(somme >0)
             {
-                for(int j = 1; j<matRGB.GetLength(1)-1; j++) // parcours toute la matrice 
+                diviseur = somme;
+
+            }
+            else
+            {
+                diviseur = 1;
+            }
+
+            
+                for (int i = 1; i < matRGB.GetLength(0) - 1; i++)
                 {
+                    for (int j = 1; j < matRGB.GetLength(1) - 1; j++) // parcours toute la matrice 
+                    {
 
-                    AccumRed = 0;
-                    AccumGreen = 0;
-                    AccumBlue = 0;
-                    int LigneN = 0;
-                    int ColonneN = 0;
+                        AccumRed = 0;
+                        AccumGreen = 0;
+                        AccumBlue = 0;
+                        int LigneN = 0;
+                        int ColonneN = 0;
 
-                    //if (i == 0 && j==0)
-                    //{
-                    //    AccumRed = matRGB[i, j].red * NoyauM[0, 0] + matRGB[i,j].red * NoyauM[0,1] + matRGB[i,j].red* NoyauM[0,2] + matRGB[i,j].red * NoyauM[1,0] + matRGB[i,j].red * NoyauM[2,0];
-
-
-
-
-                    //    AccumRed = AccumRed + matRGB[a, b].red * NoyauM[LigneN, ColonneN];
-                    //    AccumGreen = AccumGreen + matRGB[a, b].green * NoyauM[LigneN, ColonneN];
-                    //    AccumBlue = AccumBlue + matRGB[a, b].blue * NoyauM[LigneN, ColonneN];
+                        //if (i == 0 && j==0)
+                        //{
+                        //    AccumRed = matRGB[i, j].red * NoyauM[0, 0] + matRGB[i,j].red * NoyauM[0,1] + matRGB[i,j].red* NoyauM[0,2] + matRGB[i,j].red * NoyauM[1,0] + matRGB[i,j].red * NoyauM[2,0];
 
 
-                    //}
-                    //if (i == 0 && j != 0 && j!= matRGB.GetLength(1))
-                    //{
-                    //    for(int a = j-1; a< j+2; a++)
-                    //    {
-                    //       AccumRed = AccumRed + matRGB[matRGB.GetLength(0)-1,a].red * NoyauM[0, ColonneN];
-                    //       ColonneN++;
-
-                    //    }
-                        
 
 
-                    //}
+                        //    AccumRed = AccumRed + matRGB[a, b].red * NoyauM[LigneN, ColonneN];
+                        //    AccumGreen = AccumGreen + matRGB[a, b].green * NoyauM[LigneN, ColonneN];
+                        //    AccumBlue = AccumBlue + matRGB[a, b].blue * NoyauM[LigneN, ColonneN];
+
+
+                        //}
+                        //if (i == 0 && j != 0 && j!= matRGB.GetLength(1))
+                        //{
+                        //    for(int a = j-1; a< j+2; a++)
+                        //    {
+                        //       AccumRed = AccumRed + matRGB[matRGB.GetLength(0)-1,a].red * NoyauM[0, ColonneN];
+                        //       ColonneN++;
+
+                        //    }
+
+
+
+                        //}
 
 
 
@@ -676,10 +688,10 @@ namespace PSI
                             {
                                 AccumRed = AccumRed + matRGB[a, b].red * NoyauM[LigneN, ColonneN];
                                 AccumGreen = AccumGreen + matRGB[a, b].green * NoyauM[LigneN, ColonneN];
-                                AccumBlue = AccumBlue+ matRGB[a, b].blue * NoyauM[LigneN, ColonneN];
+                                AccumBlue = AccumBlue + matRGB[a, b].blue * NoyauM[LigneN, ColonneN];
                                 ColonneN++;
                             }
-                           
+
 
 
                             ColonneN = 0;
@@ -687,41 +699,70 @@ namespace PSI
                         }
 
 
-                    if (somme != 0)
+                        if (AccumRed / diviseur > 255)
+                        {
+                        MatriceRGBcopie[i, j].red = 255;
+                        }   
+                        else if (AccumRed/diviseur <0)
+                        {
+                        MatriceRGBcopie[i, j].red = 0;
+                        }
+                        else 
+                        {
+                        MatriceRGBcopie[i, j].red = AccumRed / diviseur;
+                        }
+
+                    if (AccumGreen / diviseur > 255)
                     {
-                        MatriceRGBcopie[i, j].red = AccumRed / somme;
-                        MatriceRGBcopie[i, j].green = AccumGreen / somme;
-                        MatriceRGBcopie[i, j].blue = AccumBlue / somme;
+                        MatriceRGBcopie[i, j].green = 255;
+                    }
+                    else if (AccumGreen / diviseur < 0)
+                    {
+                        MatriceRGBcopie[i, j].green = 0;
                     }
                     else
                     {
-                        MatriceRGBcopie[i, j].red = AccumRed;
-                        MatriceRGBcopie[i, j].green = AccumGreen;
-                        MatriceRGBcopie[i, j].blue = AccumBlue;
+                        MatriceRGBcopie[i, j].green = AccumGreen / diviseur;
+                    }
+                    if (AccumBlue / diviseur > 255)
+                    {
+                        MatriceRGBcopie[i, j].blue = 255;
+                    }
+                    else if (AccumBlue / diviseur < 0)
+                    {
+                        MatriceRGBcopie[i, j].blue = 0;
+                    }
+                    else
+                    {
+                        MatriceRGBcopie[i, j].blue = AccumBlue / diviseur;
+                    }
+
+
+
+
                     }
                 }
-            }
 
-            
-            for(int i =0; i<matRGB.GetLength(0); i++)
-            {
-                for(int j = 0; j<matRGB.GetLength(1); j++)
+
+                for (int i = 0; i < matRGB.GetLength(0); i++)
                 {
-                    matRGB[i, j].red = MatriceRGBcopie[i, j].red;
-                    matRGB[i, j].green = MatriceRGBcopie[i, j].green;
-                    matRGB[i, j].blue = MatriceRGBcopie[i, j].blue;
+                    for (int j = 0; j < matRGB.GetLength(1); j++)
+                    {
+                        matRGB[i, j].red = MatriceRGBcopie[i, j].red;
+                        matRGB[i, j].green = MatriceRGBcopie[i, j].green;
+                        matRGB[i, j].blue = MatriceRGBcopie[i, j].blue;
+
+
+                    }
 
 
                 }
 
 
-            }
 
 
 
-
-
-
+            
         }
 
     }
