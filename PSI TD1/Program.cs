@@ -176,7 +176,7 @@ namespace PSI
                 case 7:
                     double coeffR = 0;
                     Console.WriteLine("donner le coeff de réduction entre 0 à 0,5 (de 0 à 50% de réduction d'image");
-                    coeff = Convert.ToDouble(Console.ReadLine());
+                    coeffR = Convert.ToDouble(Console.ReadLine());
                     a.retrecir(coeffR);
 
                     break;
@@ -194,12 +194,19 @@ namespace PSI
         static void SousMenu2(MyImage a)
         {
             int choix = 0;
+            Console.WriteLine("Quel type de filtre voulez vous?");
+            Console.WriteLine("1 - Filtre Flou");
+            Console.WriteLine("2 - Filtre ");
+            choix = Convert.ToInt32(Console.ReadLine());
 
 
 
             switch (choix)
             {
                 case 1:
+                    int[,] NoyauM = { { 1, 1, 1}, { 1, 1, 1}, { 1,1,1} };
+
+                    a.MatriceConvolution(NoyauM);
                     break;
                 case 2:
                     break;
