@@ -179,11 +179,6 @@ namespace PSI
 
             File.WriteAllBytes(file, FichierByte);
 
-
-
-
-
-
         }
 
         /// <summary>
@@ -258,7 +253,7 @@ namespace PSI
             }
 
         }
-
+        
         public void NoirBlanc()
         {
             for(int i =0; i<matRGB.GetLength(0); i++)
@@ -307,7 +302,7 @@ namespace PSI
 
 
         }
-
+        
         public void Agrandir(double coeff)
         {
             int x = 0;
