@@ -302,7 +302,9 @@ namespace PSI
 
 
         }
-        
+        /// <summary>
+        /// Agrandit l'image à partir d'un coefficient fourni en paramètres
+        /// </summary>
         public void Agrandir(double coeff)
         {
             int x = 0;
@@ -597,7 +599,7 @@ namespace PSI
             }
             
         }
-
+        
         public void MatriceConvolution(int[,] NoyauM)
         {
             int AccumRed = 0;
@@ -679,7 +681,7 @@ namespace PSI
 
                         for (int a = i - 1; a < i + 2; a++)
                         {
-                            for (int b = j - 1; b < j + 2; b++) //parcours le tour du points selectionner
+                            for (int b = j - 1; b < j + 2; b++) //parcours le tour du point selectionné
                             {
                                 AccumRed = AccumRed + matRGB[a, b].red * NoyauM[LigneN, ColonneN];
                                 AccumGreen = AccumGreen + matRGB[a, b].green * NoyauM[LigneN, ColonneN];
@@ -731,8 +733,6 @@ namespace PSI
                     {
                         MatriceRGBcopie[i, j].blue = AccumBlue / diviseur;
                     }
-
-
 
 
                     }
