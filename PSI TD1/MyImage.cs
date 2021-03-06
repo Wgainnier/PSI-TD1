@@ -678,6 +678,32 @@ namespace PSI
                         //}
 
 
+                        if(i==0 && j==0)
+                        { 
+                            int valueRED=matRGB[i,j].red;
+                            int valueGREEN=matRGB[i,j].green;
+                            int valueBLUE=matRGB[i,j].blue;
+
+                            for (int a = 0; a < 3; a++)
+                            {
+                                for (int b = 0; b <3; b++) //parcours le tour du point selectionné
+                                {
+                                    if(a<1 ||b<1)
+                                    { 
+                                        AccumRed = AccumRed + valueRED* NoyauM[a, b];
+                                        AccumGreen = AccumGreen + valueGREEN* NoyauM[a, b];
+                                        AccumBlue = AccumBlue + valueBLUE* NoyauM[a, b];
+                                    }
+                                    else
+                                    { 
+                                        AccumRed = AccumRed + matRGB[a, b].red * NoyauM[LigneN, ColonneN];
+                                        AccumGreen = AccumGreen + matRGB[a, b].green * NoyauM[LigneN, ColonneN];
+                                        AccumBlue = AccumBlue + matRGB[a, b].blue * NoyauM[LigneN, ColonneN];
+                                    }
+                                }
+                            }
+                        }
+
 
                         for (int a = i - 1; a < i + 2; a++)
                         {
@@ -688,8 +714,6 @@ namespace PSI
                                 AccumBlue = AccumBlue + matRGB[a, b].blue * NoyauM[LigneN, ColonneN];
                                 ColonneN++;
                             }
-
-
 
                             ColonneN = 0;
                             LigneN++;
