@@ -568,11 +568,11 @@ namespace PSI
         public void MiroirH() // par horizontal
         {
             int x = matRGB.GetLength(0) - 1;
-        int y = matRGB.GetLength(1) - 1;
+            int y = matRGB.GetLength(1) - 1;
 
-        Pixel[,] matRGBR = new Pixel[(matRGB.GetLength(0)), matRGB.GetLength(1)];
+            Pixel[,] matRGBR = new Pixel[(matRGB.GetLength(0)), matRGB.GetLength(1)];
 
-
+            
             for (int i = 0; i<matRGB.GetLength(0); i++)
             {
                 for (int j = 0; j<matRGB.GetLength(1); j++)
@@ -672,24 +672,41 @@ namespace PSI
                         //       ColonneN++;
 
                         //    }
-
-
-
                         //}
 
-
+                        #region Cas coin supérieur gauche de l'image
                         if(i==0 && j==0)
                         { 
                             int valueRED=matRGB[i,j].red;
                             int valueGREEN=matRGB[i,j].green;
                             int valueBLUE=matRGB[i,j].blue;
+                            LigneN=1;
+                            ColonneN=1;
 
                             for (int a = 0; a < 3; a++)
                             {
                                 for (int b = 0; b <3; b++) //parcours le tour du point selectionné
                                 {
-                                    if(a<1 ||b<1)
+                                    if(a<1 && b<1)
+                                    {
+                                        AccumRed = AccumRed + valueRED* NoyauM[a, b];
+                                        AccumGreen = AccumGreen + valueGREEN* NoyauM[a, b];
+                                        AccumBlue = AccumBlue + valueBLUE* NoyauM[a, b];
+                                    }
+                                    else if((a==2) && (b==0))
+                                    {
+                                        valueRED=matRGB[i+1,j];
+                                        valuegGREEN=matRGB[i+1,j];
+                                        valueBLUE=matRGB[i+1,j];
+                                        AccumRed = AccumRed + valueRED* NoyauM[a, b];
+                                        AccumGreen = AccumGreen + valueGREEN* NoyauM[a, b];
+                                        AccumBlue = AccumBlue + valueBLUE* NoyauM[a, b];
+                                    }
+                                    else if((a==0) && (b==2))
                                     { 
+                                        valueRED=matRGB[i,j+1];
+                                        valuegGREEN=matRGB[i,j+1];
+                                        valueBLUE=matRGB[i,j+1];
                                         AccumRed = AccumRed + valueRED* NoyauM[a, b];
                                         AccumGreen = AccumGreen + valueGREEN* NoyauM[a, b];
                                         AccumBlue = AccumBlue + valueBLUE* NoyauM[a, b];
@@ -700,11 +717,13 @@ namespace PSI
                                         AccumGreen = AccumGreen + matRGB[a, b].green * NoyauM[LigneN, ColonneN];
                                         AccumBlue = AccumBlue + matRGB[a, b].blue * NoyauM[LigneN, ColonneN];
                                     }
+                                    ColonneN++;
                                 }
+                                LigneN++;
                             }
                         }
-
-
+                        #endregion
+                        #region Cas général
                         for (int a = i - 1; a < i + 2; a++)
                         {
                             for (int b = j - 1; b < j + 2; b++) //parcours le tour du point selectionné
@@ -718,7 +737,7 @@ namespace PSI
                             ColonneN = 0;
                             LigneN++;
                         }
-
+                        #endregion
 
                         if (AccumRed / diviseur > 255)
                         {
@@ -757,8 +776,6 @@ namespace PSI
                     {
                         MatriceRGBcopie[i, j].blue = AccumBlue / diviseur;
                     }
-
-
                     }
                 }
 
