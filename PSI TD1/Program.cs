@@ -167,7 +167,7 @@ namespace PSI
                     Console.WriteLine("enter angle");
 
                     angle = Convert.ToInt32(Console.ReadLine());
-                    a.Rotation( angle);
+                    a.matRGB = a.Rotation( angle);
 
                     break;
                 case 6:

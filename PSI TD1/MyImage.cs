@@ -523,11 +523,15 @@ namespace PSI
 
             hauteurI = hauteurI * 4;
             largeurI = largeurI * 4;
+            int centrex = hauteurI / 2;
+            int centrey = largeurI / 2;
+            int a = 0;
+            int b = 0;
             double anglerad = Convert.ToDouble(angle * (3.14/ 180));
             int x = 0;
             int y = 0;
 
-            Pixel[,] matRGBR = new Pixel[(matRGB.GetLength(0)), (matRGB.GetLength(1))];
+            Pixel[,] matRGBR = new Pixel[hauteurI, largeurI];
 
 
             for (int i = 0; i < matRGBR.GetLength(0); i++)
@@ -538,26 +542,25 @@ namespace PSI
                 }
             }
 
-            // coordoonner x * cos(angle) nouvelle position du pixel y * sin(angle)
-
-            for (int i =0; i<matRGB.GetLength(0); i++)
+            for (int i = centrex - matRGB.GetLength(0) / 2; i < centrex + matRGB.GetLength(0) / 2; i++)
             {
-                for(int j =0; j<matRGB.GetLength(1); j++)
+                for (int j = centrey - matRGB.GetLength(1) / 2; j < centrey + matRGB.GetLength(1) / 2; j++)
                 {
-                    x = Convert.ToInt32(i * Math.Cos(anglerad));
-                    y = Convert.ToInt32(j * Math.Sin(anglerad));
+                    x = Convert.ToInt32((i-centrex )* Math.Cos(anglerad) + (j-centrey)*Math.Sin(anglerad)+centrex);
+                    y = Convert.ToInt32(-(i-centrex) * Math.Sin(anglerad) + (j-centrey)*Math.Cos(anglerad)+centrey);
 
-                    if(x %1 !=0)
-                    {
-                        x= Convert.ToInt32(x);
-                        y = Convert.ToInt32(y);
-                    }
+                    //if(x %1 !=0)
+                    //{
+                    //    x= Convert.ToInt32(x);
+                    //    y = Convert.ToInt32(y);
+                    //}
 
 
-                    matRGBR[x,y] = matRGB[i,j];
-                   
+                    matRGBR[x, y] = matRGB[a, b];
+                    b++;
                 }
-
+                b = 0;
+                a++;
             }
 
             return matRGBR;
