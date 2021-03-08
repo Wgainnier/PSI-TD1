@@ -308,84 +308,53 @@ namespace PSI
 
         }
 
-        public void Agrandir(double coeff)
+
+        /// <summary>
+        /// de 2 à 10
+        /// </summary>
+        /// <param name="multiplicateur"></param>
+        public Pixel[,] Agrandir(int multiplicateur)
         {
-            int x = 0;
-            int y = 0;
+            //int x = 0;
+            //int y = 0;
 
-            int nbcol = Convert.ToInt32(matRGB.GetLength(1) * coeff);
-            int intervC = matRGB.GetLength(1) / nbcol;
+           
 
-            int nbligne = Convert.ToInt32(matRGB.GetLength(0) * coeff);
-            int intervL = matRGB.GetLength(0) / nbligne;
+            Pixel[,] matRGBR = new Pixel[(matRGB.GetLength(0)*multiplicateur), (matRGB.GetLength(1)*multiplicateur)];
 
-            Pixel[,] matRGBR = new Pixel[(matRGB.GetLength(0) + nbligne), (matRGB.GetLength(1) + nbcol)];
-
-            for (int i = 0; i < matRGBR.GetLength(0); i++)
-            {
-                for (int j = 0; j < matRGBR.GetLength(1); j++)
-                {
-
-                    matRGBR[i, j] = new Pixel(255, 255, 255);
-
-                }
-            }
-
-
-
-            for (int i = 0; i < matRGB.GetLength(0); i++)
-            {
-                for(int j =0; j<matRGB.GetLength(1); j++)
-                {
-
-                    matRGBR[x, y] = matRGB[i, j];
-                    y++;
-                    //if(j% intervC == 0)
-                    //{
-                    //    y++;
-                    //    for(int ii = 0; i<matRGB.GetLength(0); ii++)
-                    //    {
-
-                    //        matRGBR[x, y] = matRGB[ii, j];
-                    //        x++;
-                    //    }
-
-                    //}
-
-                }
-                y = 0;
-                x++;
-                if(i % intervL ==0)
-                {
-                    for(int j =0; j < matRGB.GetLength(1); j++)
-                    {
-
-                        matRGBR[x, y] = matRGB[i, j];
-                        y++;
-
-                    }
-                    x++;
-                    y = 0;
-
-                }
-                
-
-               
-            }
+            
 
             matRGB = new Pixel[matRGBR.GetLength(0), matRGBR.GetLength(1)];
 
-            for (int i = 0; i < matRGBR.GetLength(0); i++)
+            for (int i = 0; i < 20; i++)
+
             {
-                for (int j = 0; j < matRGBR.GetLength(1); j++)
+                for (int j = 0; j < 20; j++)
+
                 {
-                    matRGB[i, j] = new Pixel(255, 255, 255);
+                    matRGBR[i, j] = new Pixel(0, 0, 0);
 
 
                 }
 
 
             }
+
+            for (int i = 0; i < matRGBR.GetLength(0); i++)
+
+            {
+                for (int j = 0; j < matRGBR.GetLength(1); j++)
+
+                {
+                    matRGBR[i, j] = new Pixel(255, 255, 255);
+
+
+                }
+
+
+            }
+
+            return matRGBR;
 
             //for (int i = 0; i < matRGBR.GetLength(0); i++)
             //{
@@ -724,6 +693,7 @@ namespace PSI
                     {
                         MatriceRGBcopie[i, j].green = AccumGreen / diviseur;
                     }
+
                     if (AccumBlue / diviseur > 255)
                     {
                         MatriceRGBcopie[i, j].blue = 255;
@@ -736,10 +706,6 @@ namespace PSI
                     {
                         MatriceRGBcopie[i, j].blue = AccumBlue / diviseur;
                     }
-
-
-
-
                     }
                 }
 
@@ -751,11 +717,7 @@ namespace PSI
                         matRGB[i, j].red = MatriceRGBcopie[i, j].red;
                         matRGB[i, j].green = MatriceRGBcopie[i, j].green;
                         matRGB[i, j].blue = MatriceRGBcopie[i, j].blue;
-
-
                     }
-
-
                 }
 
 

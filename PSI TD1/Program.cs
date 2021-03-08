@@ -167,10 +167,10 @@ namespace PSI
 
                     break;
                 case 6:
-                    double coeff = 0;
+                    int coeff = 0;
                     Console.WriteLine("donner le coeff d'agrandissement entre 0 à 0,5 (de 0 à 50% d'agrandissement d'image");
-                    coeff = Convert.ToDouble(Console.ReadLine());
-                    a.Agrandir( coeff);
+                    coeff = Convert.ToInt32(Console.ReadLine());
+                    a.matRGB = a.Agrandir( coeff);
 
                     break;
                 case 7:
