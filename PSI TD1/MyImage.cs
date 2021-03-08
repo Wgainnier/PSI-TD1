@@ -302,17 +302,7 @@ namespace PSI
 
 
         }
-<<<<<<< HEAD
 
-=======
-        /// <summary>
-        /// Agrandit l'image à partir d'un coefficient fourni en paramètres
-        /// </summary>
-        public void Agrandir(double coeff)
-        {
-            int x = 0;
-            int y = 0;
->>>>>>> 165d863fa5e529b1e684a306ff10fb0e6302193c
 
         /// <summary>
         /// de 2 à 10
