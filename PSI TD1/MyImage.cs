@@ -313,21 +313,42 @@ namespace PSI
             //int x = 0;
             //int y = 0;
 
-           
+
+
+            hauteurI = hauteurI * multiplicateur;
+            largeurI = largeurI * multiplicateur;
+
+            //MyImage image = new MyImage(myfile);
 
             Pixel[,] matRGBR = new Pixel[(matRGB.GetLength(0)*multiplicateur), (matRGB.GetLength(1)*multiplicateur)];
 
-            
+            Pixel[,] matdouble = new Pixel[(matRGB.GetLength(0) * multiplicateur), (matRGB.GetLength(1) * multiplicateur)];
 
-            matRGB = new Pixel[matRGBR.GetLength(0), matRGBR.GetLength(1)];
+            for(int i = 0; i<matRGBR.GetLength(0); i++)
+            {
+                for(int j =0; j<matRGBR.GetLength(1);j++)
+                {
+                    matRGBR[i, j] = new Pixel(255, 255, 255);
+                }
+            }
 
-            for (int i = 0; i < 20; i++)
+     
+
+            for (int i = 0; i < matRGB.GetLength(0); i++)
 
             {
-                for (int j = 0; j < 20; j++)
+                for (int j = 0; j < matRGB.GetLength(1); j++)
 
                 {
-                    matRGBR[i, j] = new Pixel(0, 0, 0);
+                    Pixel a = matRGB[i, j];
+                    for(int x = i*multiplicateur; x <multiplicateur+i*multiplicateur; x++)
+                    {
+
+                        matRGBR[x, j] = a;
+
+                    }
+                    
+                    
 
 
                 }
@@ -336,12 +357,29 @@ namespace PSI
             }
 
             for (int i = 0; i < matRGBR.GetLength(0); i++)
-
             {
                 for (int j = 0; j < matRGBR.GetLength(1); j++)
+                {
+                    matdouble[i, j] = matRGBR[i,j];
+                }
+            }
+
+
+            for (int j = 0; j < matRGB.GetLength(1); j++)
+
+            {
+                for (int i = 0; i < matdouble.GetLength(0); i++)
 
                 {
-                    matRGBR[i, j] = new Pixel(255, 255, 255);
+                    Pixel a = matdouble[i, j];
+                    for (int x = j * multiplicateur; x < multiplicateur + j * multiplicateur; x++)
+                    {
+
+                        matRGBR[i, x] = a;
+
+                    }
+
+
 
 
                 }
@@ -479,21 +517,50 @@ namespace PSI
 
         }
 
-        public void Rotation()
-        {
-            int nbligne = matRGB.GetLength(1);
-            int nbcol = matRGB.GetLength(0);
-           
-            
 
-            for(int i =0; i<nbcol; i++)
+        public Pixel[,] Rotation(int angle) // il faut centre l'image
+        {
+
+            hauteurI = hauteurI * 4;
+            largeurI = largeurI * 4;
+            double anglerad = Convert.ToDouble(angle * (3.14/ 180));
+            int x = 0;
+            int y = 0;
+
+            Pixel[,] matRGBR = new Pixel[(matRGB.GetLength(0)), (matRGB.GetLength(1))];
+
+
+            for (int i = 0; i < matRGBR.GetLength(0); i++)
             {
-                for(int j =0; j<nbligne; j++)
+                for (int j = 0; j < matRGBR.GetLength(1); j++)
                 {
-                    matRGB[nbligne - 1 - j, i] = matRGB[i, j];
+                    matRGBR[i, j] = new Pixel(255, 255, 255);
+                }
+            }
+
+            // coordoonner x * cos(angle) nouvelle position du pixel y * sin(angle)
+
+            for (int i =0; i<matRGB.GetLength(0); i++)
+            {
+                for(int j =0; j<matRGB.GetLength(1); j++)
+                {
+                    x = Convert.ToInt32(i * Math.Cos(anglerad));
+                    y = Convert.ToInt32(j * Math.Sin(anglerad));
+
+                    if(x %1 !=0)
+                    {
+                        x= Convert.ToInt32(x);
+                        y = Convert.ToInt32(y);
+                    }
+
+
+                    matRGBR[x,y] = matRGB[i,j];
+                   
                 }
 
             }
+
+            return matRGBR;
 
 
         }
@@ -640,6 +707,7 @@ namespace PSI
 
                         //    }
                         //}
+
 
                         //#region Cas coin supérieur gauche de l'image
                         //if(i==0 && j==0)

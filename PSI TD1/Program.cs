@@ -163,7 +163,11 @@ namespace PSI
 
                     break;
                 case 5:
-                    a.Rotation();
+                    int angle = 0;
+                    Console.WriteLine("enter angle");
+
+                    angle = Convert.ToInt32(Console.ReadLine());
+                    a.Rotation( angle);
 
                     break;
                 case 6:
