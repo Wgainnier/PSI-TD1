@@ -916,5 +916,56 @@ namespace PSI
             
         }
 
+        public void FractaleMandelBroot()
+        {
+            int accum = 0;
+            int x = 0;
+            int y = 0;
+            int Zr = 0;
+            int Zi = 0;
+            int tmp = 0;
+
+
+            for(int i =0; i< matRGB.GetLength(0); i++)
+            {
+                for(int j=0; j<matRGB.GetLength(1); j++)
+                {
+                    x = i;
+                    y = j;
+                    Zr = 0;
+                    Zi = 0;
+                    accum = 0;
+
+                    while (Zr * Zr + Zi * Zi < 4 && accum < matRGB.GetLength(1))
+                    {
+                        tmp = Zr;
+                    Zr = Zr * Zr - Zi * Zi + x;
+                    Zi = 2 * Zi * tmp + y;
+                    accum = accum + 1;
+
+                    }
+
+
+                    if (accum == matRGB.GetLength(1))
+                    {
+
+                        matRGB[i, j] = new Pixel(255,255,255) ;
+
+                    }
+
+
+
+
+
+                }
+
+
+
+            }
+                
+
+
+        }
+
     }
 }
