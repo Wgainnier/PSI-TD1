@@ -347,10 +347,6 @@ namespace PSI
                         matRGBR[x, j] = a;
 
                     }
-                    
-                    
-
-
                 }
 
 
@@ -408,7 +404,7 @@ namespace PSI
         /// <summary>
         /// retrecit de 0 à 50%
         /// </summary>
-        public void retrecir(double coeff)
+        public void retrecir1(double coeff)
         {
             int x = 0;
             int y = 0;
@@ -517,6 +513,85 @@ namespace PSI
 
         }
 
+        public Pixel[,] retrecir(int coeff)
+        {
+            //hauteurI = hauteurI / coeff;
+            //largeurI = largeurI / coeff;
+
+
+            Pixel[,] matRGBR = new Pixel[(matRGB.GetLength(0) ), (matRGB.GetLength(1))];
+            Pixel[,] matRGBR1 = new Pixel[(matRGB.GetLength(0)), (matRGB.GetLength(1))];
+
+            for (int i = 0; i < matRGBR.GetLength(0); i++)
+            {
+                for (int j = 0; j < matRGBR.GetLength(1); j++)
+                {
+                    matRGBR[i, j] = new Pixel(255, 255, 255);
+                }
+            }
+
+            int a = 0;
+            int b = 0;
+            for (int x = 0; x < matRGBR.GetLength(0); x++)
+            {
+                
+                for(int y = 0; y<matRGBR.GetLength(1)/coeff; y++)
+                {
+
+
+                    matRGBR[x, y] = matRGB[a, b];
+
+                    b = b + coeff;
+
+                }
+                b = 0;
+                a ++;
+                
+
+            }
+
+            for (int i = 0; i < matRGBR1.GetLength(0); i++)
+            {
+                for (int j = 0; j < matRGBR1.GetLength(1); j++)
+                {
+                    matRGBR1[i, j] = matRGBR[i, j];
+                }
+            }
+
+
+            for (int i = 0; i < matRGBR.GetLength(0); i++)
+            {
+                for (int j = 0; j < matRGBR.GetLength(1); j++)
+                {
+                    matRGBR[i, j] = new Pixel(255, 255, 255);
+                }
+            }
+
+            a = 0;
+            b = 0;
+            for (int x = 0; x < matRGBR.GetLength(1); x++)
+            {
+
+                for (int y = 0; y < matRGBR.GetLength(0)/coeff ; y++)
+                {
+
+
+                    matRGBR[y, x] = matRGBR1[a, b];
+
+                    a = a + coeff;
+
+                }
+                a = 0;
+                b++;
+
+
+            }
+
+            return matRGBR;
+
+
+
+        }
 
         public Pixel[,] Rotation(int angle) // il faut centre l'image
         {
@@ -548,6 +623,10 @@ namespace PSI
                 {
                     x = Convert.ToInt32((i-centrex )* Math.Cos(anglerad) + (j-centrey)*Math.Sin(anglerad)+centrex);
                     y = Convert.ToInt32(-(i-centrex) * Math.Sin(anglerad) + (j-centrey)*Math.Cos(anglerad)+centrey);
+
+                    
+
+
 
                     //if(x %1 !=0)
                     //{
