@@ -408,7 +408,7 @@ namespace PSI
         /// <summary>
         /// retrecit de 0 à 50%
         /// </summary>
-        public void retrecir(double coeff)
+        public void retreci(int coeff)
         {
             int x = 0;
             int y = 0;
@@ -515,6 +515,61 @@ namespace PSI
             //    x++;
             //}
 
+        }
+
+        public Pixel[,] retrecir(int multiplicateur)
+        {
+            int x = 0;
+            int y = 0;
+            Pixel[,] matRGBR = new Pixel[(matRGB.GetLength(0)), (matRGB.GetLength(1))];
+
+            Pixel[,] matdouble = new Pixel[(matRGB.GetLength(0)), (matRGB.GetLength(1))];
+
+            for (int i = 0; i < matRGBR.GetLength(0); i++)
+            {
+                for (int j = 0; j < matRGBR.GetLength(1); j++)
+                {
+                    matRGBR[i, j] = new Pixel(255, 255, 255);
+                }
+            }
+            for (int i = 0; i < matRGBR.GetLength(0); i++)
+            {
+                for (int j = 0; j < matRGBR.GetLength(1); j++)
+                {
+                    matdouble[i, j] = new Pixel(255, 255, 255);
+                }
+            }
+
+
+            for (int i = 0; i < matRGBR.GetLength(0); i = i+multiplicateur )
+            {
+                for(int j=0; j<matRGBR.GetLength(1); j++)
+                {
+
+                    matRGBR[x, y] = matRGB[i,j];
+                    y++;
+                }
+                y = 0;
+                x++;
+            }
+
+            x = 0;
+            y = 0;
+
+            for (int j = 0; j < matRGBR.GetLength(1); j = j + multiplicateur)
+            {
+                for (int i = 0; i < matRGBR.GetLength(0); i++)
+                {
+
+                    matdouble[x, y] = matRGBR[i, j];
+                    x++;
+                }
+                x = 0;
+                y++;
+            }
+
+
+            return matdouble;
         }
 
        
