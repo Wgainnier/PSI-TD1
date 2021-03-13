@@ -347,6 +347,10 @@ namespace PSI
                         matRGBR[x, j] = a;
 
                     }
+                    
+                    
+
+
                 }
 
 
@@ -404,7 +408,7 @@ namespace PSI
         /// <summary>
         /// retrecit de 0 à 50%
         /// </summary>
-        public void retrecir1(double coeff)
+        public void retrecir(double coeff)
         {
             int x = 0;
             int y = 0;
@@ -513,100 +517,17 @@ namespace PSI
 
         }
 
-        public Pixel[,] retrecir(int coeff)
+       
+        public Pixel[,] Rotation(int angle) // il faut centrer l'image (i-hauteur de l'image divisée par deux ) pareil pour la largeur
         {
-            //hauteurI = hauteurI / coeff;
-            //largeurI = largeurI / coeff;
-
-
-            Pixel[,] matRGBR = new Pixel[(matRGB.GetLength(0) ), (matRGB.GetLength(1))];
-            Pixel[,] matRGBR1 = new Pixel[(matRGB.GetLength(0)), (matRGB.GetLength(1))];
-
-            for (int i = 0; i < matRGBR.GetLength(0); i++)
-            {
-                for (int j = 0; j < matRGBR.GetLength(1); j++)
-                {
-                    matRGBR[i, j] = new Pixel(255, 255, 255);
-                }
-            }
-
-            int a = 0;
-            int b = 0;
-            for (int x = 0; x < matRGBR.GetLength(0); x++)
-            {
-                
-                for(int y = 0; y<matRGBR.GetLength(1)/coeff; y++)
-                {
-
-
-                    matRGBR[x, y] = matRGB[a, b];
-
-                    b = b + coeff;
-
-                }
-                b = 0;
-                a ++;
-                
-
-            }
-
-            for (int i = 0; i < matRGBR1.GetLength(0); i++)
-            {
-                for (int j = 0; j < matRGBR1.GetLength(1); j++)
-                {
-                    matRGBR1[i, j] = matRGBR[i, j];
-                }
-            }
-
-
-            for (int i = 0; i < matRGBR.GetLength(0); i++)
-            {
-                for (int j = 0; j < matRGBR.GetLength(1); j++)
-                {
-                    matRGBR[i, j] = new Pixel(255, 255, 255);
-                }
-            }
-
-            a = 0;
-            b = 0;
-            for (int x = 0; x < matRGBR.GetLength(1); x++)
-            {
-
-                for (int y = 0; y < matRGBR.GetLength(0)/coeff ; y++)
-                {
-
-
-                    matRGBR[y, x] = matRGBR1[a, b];
-
-                    a = a + coeff;
-
-                }
-                a = 0;
-                b++;
-
-
-            }
-
-            return matRGBR;
-
-
-
-        }
-
-        public Pixel[,] Rotation(int angle) // il faut centre l'image
-        {
-
+            //attention, il faut que l'angle soit un double
             hauteurI = hauteurI * 4;
             largeurI = largeurI * 4;
-            int centrex = hauteurI / 2;
-            int centrey = largeurI / 2;
-            int a = 0;
-            int b = 0;
             double anglerad = Convert.ToDouble(angle * (3.14/ 180));
             int x = 0;
             int y = 0;
 
-            Pixel[,] matRGBR = new Pixel[hauteurI, largeurI];
+            Pixel[,] matRGBR = new Pixel[(matRGB.GetLength(0)), (matRGB.GetLength(1))];
 
 
             for (int i = 0; i < matRGBR.GetLength(0); i++)
@@ -617,29 +538,26 @@ namespace PSI
                 }
             }
 
-            for (int i = centrex - matRGB.GetLength(0) / 2; i < centrex + matRGB.GetLength(0) / 2; i++)
+            // coordoonner x * cos(angle) nouvelle position du pixel y * sin(angle)
+
+            for (int i =0; i<matRGB.GetLength(0); i++)
             {
-                for (int j = centrey - matRGB.GetLength(1) / 2; j < centrey + matRGB.GetLength(1) / 2; j++)
+                for(int j =0; j<matRGB.GetLength(1); j++)
                 {
-                    x = Convert.ToInt32((i-centrex )* Math.Cos(anglerad) + (j-centrey)*Math.Sin(anglerad)+centrex);
-                    y = Convert.ToInt32(-(i-centrex) * Math.Sin(anglerad) + (j-centrey)*Math.Cos(anglerad)+centrey);
+                    x = Convert.ToInt32(i * Math.Cos(anglerad)); //Math.Floor pour arrondir au plus bas, Math.Ceiling pour arrondir au plus haut
+                    y = Convert.ToInt32(j * Math.Sin(anglerad));
 
-                    
-
-
-
-                    //if(x %1 !=0)
-                    //{
-                    //    x= Convert.ToInt32(x);
-                    //    y = Convert.ToInt32(y);
-                    //}
+                    if(x %1 !=0)
+                    {
+                        x= Convert.ToInt32(x);
+                        y = Convert.ToInt32(y);
+                    }
 
 
-                    matRGBR[x, y] = matRGB[a, b];
-                    b++;
+                    matRGBR[x,y] = matRGB[i,j];
+                   
                 }
-                b = 0;
-                a++;
+
             }
 
             return matRGBR;
@@ -914,57 +832,6 @@ namespace PSI
 
 
             
-        }
-
-        public void FractaleMandelBroot()
-        {
-            int accum = 0;
-            int x = 0;
-            int y = 0;
-            int Zr = 0;
-            int Zi = 0;
-            int tmp = 0;
-
-
-            for(int i =0; i< matRGB.GetLength(0); i++)
-            {
-                for(int j=0; j<matRGB.GetLength(1); j++)
-                {
-                    x = i;
-                    y = j;
-                    Zr = 0;
-                    Zi = 0;
-                    accum = 0;
-
-                    while (Zr * Zr + Zi * Zi < 4 && accum < matRGB.GetLength(1))
-                    {
-                        tmp = Zr;
-                    Zr = Zr * Zr - Zi * Zi + x;
-                    Zi = 2 * Zi * tmp + y;
-                    accum = accum + 1;
-
-                    }
-
-
-                    if (accum == matRGB.GetLength(1))
-                    {
-
-                        matRGB[i, j] = new Pixel(255,255,255) ;
-
-                    }
-
-
-
-
-
-                }
-
-
-
-            }
-                
-
-
         }
 
     }
