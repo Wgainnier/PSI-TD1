@@ -181,7 +181,7 @@ namespace PSI
                     int coeffR = 0;
                     Console.WriteLine("donner le coeff de réduction entre 0 à 0,5 (de 0 à 50% de réduction d'image");
                     coeffR = Convert.ToInt32(Console.ReadLine());
-                    a.matRGB = a.retrecir(coeffR);
+                    
 
                     break;
 
